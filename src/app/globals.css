@@ -1,26 +1,142 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ *
+ * Design system — dark, near-black canvas, single teal/emerald accent.
+ * Synthesized from Linear's DESIGN.md + ui-ux-pro-max + open-design craft.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Surfaces (dark-native, never pure black) */
+  --color-bg: #08090a;
+  --color-surface: #0f1011;
+  --color-elevated: #191a1b;
+  --color-hover: #28282c;
+
+  /* Text — luminance hierarchy, never pure white */
+  --color-fg: #f7f8f8;
+  --color-fg-2: #d0d6e0;
+  --color-fg-3: #8a8f98;
+  --color-fg-4: #767a83; /* lightened to meet WCAG AA (~4.6:1 on #08090a) */
+
+  /* Single accent — teal/emerald "data" signal */
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-accent-deep: #14b8a6;
+  --color-success: #34d399;
+  --color-danger: #f87171; /* error states only — kept distinct from the accent */
+
+  /* Borders — semi-transparent white, like wireframes in moonlight */
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+
+  /* Fonts (bound in layout.tsx via next/font) */
+  --font-sans: var(--font-inter), "SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Motion tokens */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Radii */
+  --radius-card: 16px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --accent-glow: rgba(45, 212, 191, 0.14);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  border-color: var(--color-border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  /* Inter OpenType: geometric single-story 'a' + cleaner letterforms (Linear's signature) */
+  font-feature-settings: "cv01" 1, "ss03" 1, "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular figures for metrics/stats */
+.tnum {
+  font-feature-settings: "tnum" 1, "cv01" 1, "ss03" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selection */
+::selection {
+  background: rgba(45, 212, 191, 0.22);
+  color: #f7f8f8;
+}
+
+/* Accessible focus — visible 2px accent ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar (dark, subtle) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #23252a;
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34343a;
+}
+
+/* Display type: aggressive negative tracking at large sizes */
+.tracking-display {
+  letter-spacing: -0.022em;
+}
+.tracking-tightish {
+  letter-spacing: -0.012em;
+}
+
+/* Eyebrow / kicker: mono, uppercase, positive tracking */
+.kicker {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--color-accent);
+}
+
+/* Subtle dotted grid backdrop utility */
+.bg-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Reduced-motion: neutralize transitions/animations site-wide for non-essential motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

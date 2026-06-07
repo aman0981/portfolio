@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Aman Nikumb — Résumé</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm; }
+  * { box-sizing: border-box; }
+  :root { --ink:#13151a; --muted:#55606e; --line:#dfe3ea; --accent:#0d9488; }
+  html,body { padding:0; margin:0; }
+  body {
+    font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); font-size: 10.2px; line-height: 1.45; background:#fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .name { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0; }
+  .role { font-size: 12px; font-weight: 600; color: var(--accent); margin: 2px 0 6px; letter-spacing: 0.2px; }
+  .contact { font-size: 9.6px; color: var(--muted); }
+  .contact a { color: var(--muted); text-decoration: none; }
+  .contact span { color: var(--line); margin: 0 6px; }
+  h2 {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--accent);
+    margin: 13px 0 6px; padding-bottom: 3px; border-bottom: 1.5px solid var(--line);
+  }
+  .summary { color:#2b3038; margin: 9px 0 2px; font-size: 10.4px; }
+  .row { display:flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .pos { font-weight: 700; font-size: 11px; }
+  .org { font-weight: 600; color: var(--accent); }
+  .when { color: var(--muted); font-size: 9.4px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  ul { margin: 4px 0 8px; padding-left: 15px; }
+  li { margin: 2.5px 0; }
+  .proj { margin: 7px 0; }
+  .proj .pname { font-weight: 700; }
+  .proj .pstack { color: var(--muted); font-size: 9.2px; }
+  .proj .plink { color: var(--accent); text-decoration: none; font-size: 9.2px; }
+  .skills div { margin: 2.5px 0; }
+  .skills b { color:#222; }
+  .two { display:grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .muted { color: var(--muted); }
+  .tight { margin: 0; }
+</style>
+</head>
+<body>
+  <p class="name">AMAN NIKUMB</p>
+  <p class="role">Software Engineer — Data</p>
+  <p class="contact">
+    Gurugram, India <span>|</span> +91 85140 87234 <span>|</span>
+    <a href="mailto:amannikumbh73@gmail.com">amannikumbh73@gmail.com</a> <span>|</span>
+    <a href="https://www.linkedin.com/in/aman-nikumb-6922a6216/">linkedin.com/in/aman-nikumb</a> <span>|</span>
+    <a href="https://github.com/aman0981">github.com/aman0981</a>
+  </p>
+
+  <p class="summary">
+    Backend &amp; data engineer with 1.5+ years building scalable APIs, distributed systems, and code-first ETL.
+    Strong in Python (FastAPI, Django, Celery), PySpark/Databricks medallion pipelines, PostgreSQL/Elasticsearch and Docker.
+    Promoted to Software Engineer — Data (Apr 2026). Aspiring Forward Deployed Engineer: requirements → build &amp; ship → deploy → data → business analytics.
+  </p>
+
+  <h2>Experience</h2>
+  <div class="row"><span><span class="pos">Software Engineer — Data</span>, <span class="org">Engineo Solutions</span></span><span class="when">Apr 2026 — Present</span></div>
+  <ul>
+    <li>Build a code-first ETL pipeline on Databricks with PySpark, transforming data through a bronze → silver → gold medallion architecture and loading the curated output into Elasticsearch.</li>
+    <li>Expose a streaming API that delivers data to clients in chunks, with Elasticsearch queries built dynamically from each client request's filter payload.</li>
+    <li>Scaling toward a centralized API integrating an external data endpoint, a parse service to normalize responses, and a DocumentDB sink — delivering to clients while persisting for reuse.</li>
+  </ul>
+  <div class="row"><span><span class="pos">Associate Software Engineer — Data</span>, <span class="org">Engineo Solutions</span></span><span class="when">Nov 2024 — Apr 2026</span></div>
+  <ul>
+    <li>Built a distributed data-extraction platform for a US travel-domain client (Django, FastAPI, Celery, RabbitMQ, Redis, MongoDB, PostgreSQL) for scalable aggregation and monitoring.</li>
+    <li>Engineered an automated ingestion pipeline for a Big-4 consulting firm — Excel → JSON → PostgreSQL via APIs — cutting manual effort ~70%, with parent-child relational mapping and FK resolution.</li>
+    <li>Implemented Redis caching and rate-limiting (40%+ fewer redundant calls) and a layered API-security stack (API-key, IP allow-listing, JWT, CORS, bad-user-agent flagging); integrated AWS S3 + OpenSearch.</li>
+  </ul>
+
+  <h2>Projects</h2>
+  <div class="proj">
+    <div class="row"><span class="pname">XBRL Intelligence Engine <span class="muted">— Solo</span></span>
+      <a class="plink" href="https://github.com/aman0981/XBRL_Engine">github.com/aman0981/XBRL_Engine</a></div>
+    <div class="pstack">Python · FastAPI · async SQLAlchemy 2.0 / asyncpg · PostgreSQL 16 · Alembic · structlog · Docker</div>
+    <ul>
+      <li>Async, multi-source ETL ingesting XBRL/iXBRL from SEC EDGAR, EU ESEF and direct upload into one canonical financial model — 24,852 facts, 71 filings, 552 canonical line-items.</li>
+      <li>Mode A vs Mode B cross-source reconciliation + bitemporal restatement detection (dimension/unit/decimals-aware); 135 automated tests; hardened non-root multi-stage Docker image.</li>
+    </ul>
+  </div>
+  <div class="proj">
+    <div class="row"><span class="pname">HireBeacon — India Job-Intelligence Platform <span class="muted">— Solo</span></span>
+      <a class="plink" href="https://github.com/aman0981/HireBeacon">github.com/aman0981/HireBeacon</a></div>
+    <div class="pstack">Python · Supabase (Postgres 17, pgvector) · Next.js 15 · TypeScript · GitHub Actions · Groq/Gemini</div>
+    <ul>
+      <li>Unified 13 ATS sources (incl. 4 of 5 enterprise "big-5") behind one adapter contract; idempotent, self-healing ingestion that never deletes live inventory on a partial crawl.</li>
+      <li>Semantic résumé→job matching: MiniLM 384-dim embeddings → pgvector cosine top-25 via a Postgres RPC → fallback-chained LLM rationale; row-level security; 336 tests; free-tier infra.</li>
+    </ul>
+  </div>
+
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <div><b>Languages:</b> Python, SQL, Golang</div>
+    <div><b>Backend &amp; APIs:</b> FastAPI, Django, DRF, Celery, Pydantic, REST, JWT / API-key security</div>
+    <div><b>Data &amp; ETL:</b> PySpark, Databricks, Medallion ETL, Pandas, web crawling (Playwright, BeautifulSoup)</div>
+    <div><b>Datastores &amp; Search:</b> PostgreSQL, MongoDB, Redis, Elasticsearch / OpenSearch, pgvector, DocumentDB, AWS S3</div>
+    <div><b>Async &amp; Infra:</b> asyncio, async SQLAlchemy 2.0, RabbitMQ, Docker, AWS, GitHub Actions, Git</div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2>Education</h2>
+      <div class="row"><span class="pos" style="font-size:10.4px">B.Tech, Computer Science</span><span class="when">2020 — 2024</span></div>
+      <div class="muted">GITA Autonomous College · GPA 8.54</div>
+    </div>
+    <div>
+      <h2>Achievements</h2>
+      <div class="tight">200+ problems solved on LeetCode &amp; HackerRank · LeetCode 50-Days &amp; Top SQL 50 badges.</div>
+      <div class="muted" style="margin-top:3px">Certs: Become a Django Developer (LinkedIn) · 100 Days of Code: Python (Udemy)</div>
+    </div>
+  </div>
+</body>
+</html>
