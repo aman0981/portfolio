@@ -32,7 +32,7 @@ export function Projects() {
                   aria-label={`${project.name} — view case study`}
                   className={`relative block ${reverse ? "md:order-2" : "md:order-1"}`}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-elevated md:h-full">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-elevated md:aspect-auto md:h-full md:min-h-[20rem]">
                     <Image
                       src={project.cover}
                       alt={`${project.name} — product screenshot`}

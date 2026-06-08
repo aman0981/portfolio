@@ -11,7 +11,7 @@ import * as THREE from "three";
  * distributed in a sphere via maath. Drifts slowly and leans toward the pointer.
  * Research-backed lightweight approach — no heavy meshes. See deep-research §3.
  */
-function ParticleField({ count = 5000 }: { count?: number }) {
+function ParticleField({ count = 4200 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
@@ -37,10 +37,10 @@ function ParticleField({ count = 5000 }: { count?: number }) {
         <PointMaterial
           transparent
           color="#2dd4bf"
-          size={0.0125}
+          size={0.011}
           sizeAttenuation
           depthWrite={false}
-          opacity={0.85}
+          opacity={0.6}
           toneMapped={false}
         />
       </Points>

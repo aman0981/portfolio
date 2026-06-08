@@ -1,10 +1,10 @@
-import Image from "next/image";
 import { ArrowRight, Mail } from "lucide-react";
 import { profile, socials } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { Hero3DBackground } from "@/components/hero/Hero3DBackground";
+import { HeroPortrait } from "@/components/hero/HeroPortrait";
 
 export function Hero() {
   return (
@@ -37,7 +37,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.18}>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-3 md:text-xl">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-2 md:text-xl">
               {profile.tagline}
             </p>
           </Reveal>
@@ -73,27 +73,8 @@ export function Hero() {
           </Reveal>
         </div>
 
-        {/* Right — headshot */}
-        <Reveal delay={0.2} className="justify-self-center md:justify-self-end">
-          <div className="relative">
-            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-transparent to-accent-deep/20 blur-2xl" />
-            <div className="relative aspect-[4/5] w-[18rem] overflow-hidden rounded-[1.75rem] border border-border-strong bg-elevated shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:w-[21rem]">
-              <Image
-                src={profile.headshot}
-                alt="Aman Nikumb"
-                fill
-                priority
-                sizes="(max-width: 640px) 18rem, 21rem"
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg/80 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-border-strong bg-bg/70 px-3 py-2 backdrop-blur-md">
-                <span className="font-mono text-xs text-fg-2">{profile.location}</span>
-                <span className="font-mono text-xs text-accent">{profile.yearsExperience} yrs</span>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        {/* Right — dynamic 3D portrait (tilt + scroll drift + framing words) */}
+        <HeroPortrait />
       </div>
     </section>
   );

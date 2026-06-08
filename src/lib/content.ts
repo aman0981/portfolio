@@ -50,9 +50,8 @@ export const socials: Social[] = [
   { label: "GitHub", href: "https://github.com/aman0981", icon: "github", handle: "aman0981" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/aman-nikumb-6922a6216/", icon: "linkedin", handle: "aman-nikumb" },
   { label: "Email", href: "mailto:amannikumbh73@gmail.com", icon: "mail", handle: "amannikumbh73@gmail.com" },
-  // NOTE: confirm exact LeetCode / HackerRank profile URLs with Aman.
-  { label: "LeetCode", href: "https://leetcode.com/u/aman0981/", icon: "code", handle: "aman0981" },
-  { label: "HackerRank", href: "https://www.hackerrank.com/profile/aman0981", icon: "terminal", handle: "aman0981" },
+  { label: "LeetCode", href: "https://leetcode.com/u/aman_147/", icon: "code", handle: "aman_147" },
+  { label: "HackerRank", href: "https://www.hackerrank.com/profile/amannikumbh73", icon: "terminal", handle: "amannikumbh73" },
 ];
 
 export const nav = [
