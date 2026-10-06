@@ -1,0 +1,76 @@
+% Aman Nikumb — Python Backend & Data Engineer resume (Resume B, hybrid)
+% Targets three role families from one file: Junior Data Engineer / ETL Engineer,
+% Python Developer / Python Engineer, and FastAPI / Backend Engineer.
+% Keyword basis: docs/resume/jd-research/python-backend-and-data-engineer.md
+% Compile: bash docs/resume/tools/compile.sh docs/resume/latex/Aman_Nikumb_Resume_Python_Data_Engineer.tex
+% Every claim is traceable to docs/resume/master-profile.md.
+\documentclass[10pt,a4paper]{article}
+\usepackage[teal]{amanresume}
+\hypersetup{
+  pdftitle={Aman Nikumb - Python Backend and Data Engineer Resume},
+  pdfauthor={Aman Nikumb},
+  pdfsubject={Python Developer / FastAPI Backend Engineer / Junior Data Engineer resume},
+  pdfkeywords={Python, FastAPI, Django, DRF, REST API, Backend Engineer, Python Developer, Microservices,
+    Asynchronous Programming, asyncio, SQLAlchemy, Pydantic, Celery, RabbitMQ, Redis, Caching, JWT,
+    Data Engineer, ETL, ELT, PySpark, Databricks, Delta Lake, Medallion Architecture, Data Pipelines,
+    SQL, PostgreSQL, MongoDB, Elasticsearch, AWS, Docker, CI/CD, Pytest, Golang}
+}
+
+\begin{document}
+
+\ARname{Aman Nikumb}
+% Headline carries the exact phrases three different title searches match on:
+% "Python", "Backend ... Engineer", "Data Engineer", "FastAPI".
+\ARtagline{Python Backend \& Data Engineer \textbar\ FastAPI \& PySpark ETL}
+\ARcontact{Gurugram, India\sep +91 85140 87234\sep
+  \clink{mailto:amannikumbh73@gmail.com}{amannikumbh73@gmail.com}\sep
+  \clink{https://www.linkedin.com/in/aman-nikumb-6922a6216/}{linkedin.com/in/aman-nikumb}\sep
+  \clink{https://github.com/aman0981}{github.com/aman0981}}
+
+\section{Summary}
+\summary{Two years building production Python services and data pipelines at a data-engineering consultancy. Designs and ships REST APIs with FastAPI and Django over PostgreSQL, MongoDB and Redis, with Celery and RabbitMQ carrying distributed background work, and builds code-first PySpark ETL on Databricks through bronze, silver and gold Delta Lake layers. Automated a schema-less database pipeline that cut manual effort by about 70\%, and a caching and rate-limiting layer that removed 40\%+ of redundant API calls.}
+
+\section{Technical Skills}
+\skillline{Languages \& Core}{Python 3, SQL, Golang, object-oriented design, asynchronous programming}
+\skillline{Backend \& APIs}{FastAPI, Django, DRF, REST API design, microservices, Pydantic, SQLAlchemy (sync and async), Alembic, JWT/API-key authentication, CORS, rate limiting, streaming/chunked APIs}
+\skillline{Data Engineering \& ETL}{PySpark, Databricks (Notebooks, Workflows/Jobs), Delta Lake, medallion architecture (bronze/silver/gold), ETL/ELT design, batch ingestion, Pandas, data validation, reconciliation, idempotent upserts}
+\skillline{Databases, Caching \& Search}{PostgreSQL, MongoDB, Redis, Elasticsearch/OpenSearch, pgvector, DocumentDB, cloud object storage (AWS S3), Supabase}
+\skillline{Distributed, Cloud \& DevOps}{Celery, RabbitMQ, asyncio, AWS (ECR, EKS, CloudWatch, S3), Docker, Git, GitHub Actions CI, Pytest (unit and integration), structlog, Postman, JMeter}
+
+\section{Experience}
+\entry{Software Engineer -- Data}{Engineo Solutions Pvt Ltd}{Gurugram}{Apr 2026 - Present}
+\subentry{Promoted from Associate Software Engineer in April 2026}
+\begin{itemize}
+  \item Build a code-first ETL pipeline on Databricks with PySpark, transforming raw data from a cloud object-storage landing zone through bronze, silver and gold Delta Lake layers into Elasticsearch.
+  \item Developed the end-to-end backend system for a client travel-aggregator web portal and deployed it on AWS across ECR, EKS, CloudWatch and S3, with some services written in Golang.
+  \item Orchestrate pipeline runs with Databricks Workflows and expose a streaming API that delivers curated data to clients in chunks, building Elasticsearch queries dynamically from each request's filter payload.
+  \item Designing a centralized data API that integrates an external data endpoint, a parse service that normalizes responses, and a DocumentDB sink that persists results for reuse.
+\end{itemize}
+
+\entry{Associate Software Engineer -- Data}{Engineo Solutions Pvt Ltd}{Gurugram}{Nov 2024 - Mar 2026}
+\begin{itemize}
+  \item Built a distributed backend platform for a US travel-domain client with Django, FastAPI, Celery, RabbitMQ, Redis, MongoDB and PostgreSQL, designing the task pipelines that run its background processing.
+  \item Implemented Redis caching and rate limiting that removed 40\%+ of redundant API calls, plus a layered API security stack (API keys, IP allow-listing, JWT, CORS); integrated AWS S3 and OpenSearch.
+  \item Built a database automation pipeline for a schema-less platform at a Big-4 consulting firm: Excel to JSON to PostgreSQL through APIs, with dynamic parent-child relational mapping and foreign-key resolution across tables, cutting manual effort by about 70\%.
+  \item Developed an ETL pipeline for travel airline data and contributed to early lakehouse ETL development, gaining hands-on distributed data processing experience.
+\end{itemize}
+
+\section{Projects}
+\project{XBRL Intelligence Engine}{async FastAPI service and multi-source ETL (solo)}{github.com/aman0981/XBRL\_Engine}{https://github.com/aman0981/XBRL_Engine}{Python \textbar\ FastAPI \textbar\ async SQLAlchemy 2.0 / asyncpg \textbar\ PostgreSQL \textbar\ Alembic \textbar\ Docker}
+\begin{itemize}
+  \item Async, multi-source ETL ingesting XBRL/iXBRL from SEC EDGAR, EU ESEF and direct upload into one canonical financial model: 24,852 facts, 71 filings, 552 canonical line items.
+  \item Cross-source reconciliation, bitemporal restatement detection and regulator-aware mapping fallback chains, guarded by 135 unit and Postgres integration tests; hardened non-root Docker image.
+\end{itemize}
+
+\project{HireBeacon}{live job-intelligence platform (solo)}{hirebeacon.in}{https://hirebeacon.in}{Python \textbar\ PostgreSQL (Supabase, pgvector) \textbar\ GitHub Actions \textbar\ Next.js \textbar\ TypeScript}
+\begin{itemize}
+  \item Daily ingestion pipeline across 4,959 company career pages and government recruiting bodies, keeping 69,318 live listings refreshed; idempotent loads whose close-out gate blocks deletions when a crawl returns under 50\% of baseline; 336 automated tests.
+\end{itemize}
+
+\section{Education}
+\edu{B.Tech, Computer Science}{GITA Autonomous College}{GPA 8.54}{2020 - 2024}
+
+\section{Certifications \& Achievements}
+\summary{\textbf{Certifications:} Django Developer (LinkedIn Learning); 100 Days of Code: Python Pro Bootcamp (Udemy).\ \ \textbf{Problem solving:} 200+ problems on LeetCode and HackerRank; LeetCode 50-Days and Top SQL 50 badges.}
+
+\end{document}

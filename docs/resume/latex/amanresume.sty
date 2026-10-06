@@ -1,0 +1,157 @@
+%% amanresume.sty — "Editorial Serif": an original single-column, ATS-safe resume style.
+%%
+%% Design brief: the premium, typographically-led look of a high-end editorial template —
+%% letterspaced display capitals, real small caps, hairline rules, a centred masthead and a
+%% double rule — built entirely from LaTeX primitives. No proprietary template assets are used.
+%%
+%% ATS contract (per the LaTeX Document Skill's references/resume-ats-guide.md):
+%%   single column · article class · contact info in the document body, never a header/footer ·
+%%   standard \section headings · itemize bullets · no graphics, TikZ, minipage columns,
+%%   tables-for-layout, colour fills, photos or skill bars · all fonts embedded by pdflatex.
+%%
+%% Options:
+%%   teal | navy | bronze   accent colour (default teal)
+%%   sans                   Source Sans 3 throughout instead of the serif (fallback look)
+%%
+%% Engine: pdflatex. Requires XCharter, tgheros, sourcesans, microtype, titlesec, enumitem,
+%% etoolbox, xcolor, geometry, hyperref — all present in docs/resume/tools/Dockerfile.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{amanresume}[2026/10/05 v2.1 Editorial Serif single-column ATS-safe resume style]
+%% v2.1 — section headings kerned flush to the left margin (see \ARsectitle below).
+
+\newif\ifAR@sans
+\def\AR@accent{teal}
+\DeclareOption{sans}{\AR@sanstrue}
+\DeclareOption{teal}{\def\AR@accent{teal}}
+\DeclareOption{navy}{\def\AR@accent{navy}}
+\DeclareOption{bronze}{\def\AR@accent{bronze}}
+\DeclareOption*{\PackageWarning{amanresume}{Unknown option `\CurrentOption'}}
+\ProcessOptions\relax
+
+% ---------------------------------------------------------------- fonts ----
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\ifAR@sans
+  \RequirePackage[default,lining,tabular,semibold]{sourcesans}
+  \newcommand{\ARdisplay}{}
+\else
+  % XCharter: a transitional serif drawn to stay crisp at small sizes and on screen.
+  \RequirePackage[scaled=1.0]{XCharter}
+  \RequirePackage{tgheros}            % sans companion for the occasional technical token
+  \newcommand{\ARdisplay}{}
+\fi
+% tracking=true enables \textls, which drives the letterspaced display capitals and small caps.
+\RequirePackage[protrusion=true,expansion=false,tracking=true,letterspace=90]{microtype}
+
+% --------------------------------------------------------------- colours ----
+\RequirePackage{xcolor}
+\definecolor{ARink}{RGB}{26,28,32}      % near-black body text
+\definecolor{ARmuted}{RGB}{90,99,112}   % secondary text: dates, locations, stacks
+\definecolor{ARrule}{RGB}{201,206,214}  % hairlines
+\definecolor{ARteal}{RGB}{10,92,84}
+\definecolor{ARnavy}{RGB}{22,45,80}
+\definecolor{ARbronze}{RGB}{124,86,42}
+\edef\AR@setaccent{\noexpand\colorlet{ARaccent}{AR\AR@accent}}\AR@setaccent
+
+% ------------------------------------------------------------------ page ----
+\RequirePackage[a4paper,top=0.44in,bottom=0.34in,left=0.58in,right=0.58in]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\hyphenpenalty=2500 \exhyphenpenalty=2500
+\AtBeginDocument{\color{ARink}\fontsize{9.6pt}{11.9pt}\selectfont}
+
+% ----------------------------------------------------------------- links ----
+% hidelinks: the accent is applied deliberately by \clink, so no coloured boxes or borders.
+\RequirePackage[hidelinks,pdfencoding=auto,psdextra]{hyperref}
+\urlstyle{same}
+
+% -------------------------------------------------------------- sections ----
+% Letterspaced capitals sitting on a full-width hairline. Asymmetric space above and below
+% makes each section read as a block rather than one undifferentiated list.
+\RequirePackage{titlesec}
+% Note on text extraction: `pdftotext -layout` sometimes renders a letterspaced heading as
+% "E DUCAT ION". That is its column-reconstruction heuristic, not an encoding fault — it happens
+% at tracking 0 as well, and both pypdf (the PDFBox/Tika-style content-stream walk that most ATS
+% use) and `pdftotext -raw` read the headings intact. Verified by docs/resume/tools/pdf_check.py.
+% \textls adds half its tracking as leading space before the first glyph, which pushed every
+% section heading 0.75pt (= 170/1000 x 8.8pt / 2) right of the body text and of its own hairline
+% rule. The negative kern cancels it so headings sit flush at the margin. Verified by measuring
+% word bounding boxes with `pdftotext -bbox`: headings now start at 41.76pt, the geometry margin.
+\newcommand{\ARsectitle}[1]{\hspace*{-0.085em}\textls[170]{\MakeUppercase{#1}}}
+\titleformat{\section}
+  {\color{ARaccent}\fontsize{8.8pt}{10pt}\bfseries}
+  {}{0pt}{\ARsectitle}
+  [\vspace{-3pt}{\color{ARrule}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{7pt}{3.6pt}
+
+% ----------------------------------------------------------------- lists ----
+% A small accent bullet rather than a full-size dot — quieter and more editorial at this size.
+% Deliberately a real character (not a \rule), so the marker survives PDF text extraction.
+\RequirePackage{enumitem}
+\setlist[itemize]{leftmargin=1.05em,labelsep=0.45em,itemsep=1.1pt,parsep=0pt,
+  topsep=1.8pt,partopsep=0pt,
+  label={\color{ARaccent}\raisebox{0.18ex}{\fontsize{5.4pt}{5.4pt}\selectfont\textbullet}}}
+
+% ------------------------------------------------------------ masthead ----
+\RequirePackage{etoolbox}
+\newcommand{\sep}{{\color{ARrule}\ \textbar\ }}
+\newcommand{\clink}[2]{\href{#1}{\color{ARmuted}#2}}
+
+% \ARname{...} — letterspaced display capitals, the signature of the layout.
+\newcommand{\ARname}[1]{%
+  \begingroup\centering
+  {\fontsize{21.5pt}{23pt}\selectfont\textls[180]{\MakeUppercase{#1}}\par}%
+  \endgroup}
+
+% \ARtagline{...} — letterspaced small capitals in the accent.
+\newcommand{\ARtagline}[1]{%
+  \vspace{4pt}%
+  \begingroup\centering
+  {\color{ARaccent}\fontsize{9.3pt}{11pt}\selectfont\textls[120]{\scshape #1}\par}%
+  \endgroup}
+
+% \ARcontact{...} — contact line, then the double rule that closes the masthead.
+\newcommand{\ARcontact}[1]{%
+  \vspace{4.5pt}%
+  \begingroup\centering
+  {\color{ARmuted}\fontsize{8.9pt}{10.5pt}\selectfont #1\par}%
+  \endgroup
+  \vspace{5pt}%
+  {\color{ARink}\hrule height 0.9pt}%
+  \vspace{2.2pt}%
+  {\color{ARrule}\hrule height 0.4pt}%
+  \vspace{1pt}}
+
+% ------------------------------------------------------------ body blocks ----
+\newcommand{\summary}[1]{\par{\fontsize{9.6pt}{12pt}\selectfont #1\par}}
+\newcommand{\ARdates}[1]{{\color{ARmuted}\fontsize{8.9pt}{10.5pt}\selectfont #1}}
+
+% \entry{Role}{Employer}{Location}{Dates}
+\newcommand{\entry}[4]{%
+  \par\addvspace{4.5pt}%
+  {\bfseries\fontsize{10.3pt}{12pt}\selectfont #1}%
+  {\color{ARmuted}\ \textbar\ }{\color{ARaccent}\textls[40]{\scshape #2}}%
+  \ifblank{#3}{}{{\color{ARmuted}, #3}}%
+  \hfill\ARdates{#4}\par\nobreak\addvspace{0.4pt}}
+
+% \subentry{...} — a muted note under an entry (used for the promotion line).
+\newcommand{\subentry}[1]{{\color{ARmuted}\itshape\fontsize{8.9pt}{10.5pt}\selectfont #1\par}\nobreak}
+
+% \project{Name}{Descriptor}{Link text}{URL}{Stack}
+\newcommand{\project}[5]{%
+  \par\addvspace{4.5pt}%
+  {\bfseries\fontsize{10.3pt}{12pt}\selectfont #1}%
+  \ifblank{#2}{}{{\color{ARmuted}\ \textbar\ #2}}%
+  \ifblank{#3}{}{\hfill{\fontsize{8.9pt}{10.5pt}\selectfont\href{#4}{\color{ARaccent}#3}}}\par\nobreak
+  \ifblank{#5}{}{{\color{ARmuted}\fontsize{8.9pt}{10.5pt}\selectfont #5\par}\nobreak}\addvspace{0.4pt}}
+
+% \skillline{Label}{items}
+\newcommand{\skillline}[2]{\par{\bfseries #1:}\ #2\par\addvspace{1.5pt}}
+
+% \edu{Degree}{School}{Detail}{Dates}
+\newcommand{\edu}[4]{\par\addvspace{2.5pt}{\bfseries #1}{\color{ARmuted}\ \textbar\ }#2%
+  \ifblank{#3}{}{{\color{ARmuted}\ \textbar\ #3}}\hfill\ARdates{#4}\par}
+
+\endinput

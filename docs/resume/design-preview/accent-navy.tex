@@ -1,0 +1,73 @@
+% Design preview - accent-navy
+% Deep navy RGB(22,45,80). Most conservative.
+% Identical content to Resume A; only the amanresume package options differ.
+\documentclass[10pt,a4paper]{article}
+\usepackage[navy]{amanresume}
+\hypersetup{
+  pdftitle={Aman Nikumb - Web Scraping Engineer Resume},
+  pdfauthor={Aman Nikumb},
+  pdfsubject={Web Scraping Engineer / Web Data Extraction Engineer resume},
+  pdfkeywords={Web Scraping, Web Crawling, Data Extraction, Python, Playwright, SeleniumBase, Requests,
+    BeautifulSoup, Browser Automation, Anti-Bot Mitigation, Reverse Engineering, TLS Fingerprinting,
+    Proxy Rotation, CAPTCHA, Wireshark, Network Analysis, HTTP, HTTPS, Golang, AWS, Docker, Celery,
+    RabbitMQ, FastAPI, PostgreSQL, MongoDB, Redis, Elasticsearch}
+}
+
+\begin{document}
+
+\ARname{Aman Nikumb}
+\ARtagline{Software Engineer \textbar\ Web Scraping \& Data Extraction}
+\ARcontact{Gurugram, India\sep +91 85140 87234\sep
+  \clink{mailto:amannikumbh73@gmail.com}{amannikumbh73@gmail.com}\sep
+  \clink{https://www.linkedin.com/in/aman-nikumb-6922a6216/}{linkedin.com/in/aman-nikumb}\sep
+  \clink{https://github.com/aman0981}{github.com/aman0981}}
+
+\section{Summary}
+\summary{Software Engineer with 2 years building production web-scraping and backend systems in Python and Golang. Builds extraction services for sites fronted by enterprise bot-management platforms, collecting public data within terms of service and polite rate limits, and upgraded an in-house extraction framework to multi-browser-engine support. Works across the stack a crawler touches: HTTP and TLS behaviour, network analysis, reverse-engineered endpoints and AWS deployment.}
+
+\section{Technical Skills}
+\skillline{Web Scraping \& Browser Automation}{Python, Playwright, SeleniumBase, Requests, BeautifulSoup, multi-browser-engine automation, HTML/CSS selectors, DOM parsing, pagination, crawl scheduling}
+\skillline{Anti-Bot Mitigation \& Scraper Reliability}{reverse engineering, TLS fingerprinting, proxy rotation, CAPTCHA solvers, header and session rotation, retries with exponential backoff, rate-limit and HTTP 403/429 handling, enterprise bot-management platforms (Kasada, Akamai), responsible terms-of-service-aware scraping}
+\skillline{Network Analysis \& Protocols}{Wireshark, browser DevTools (DOM, Network), traffic and request/response analysis, HTTP/HTTPS, TLS/SSL, headers, cookies, sessions, REST}
+\skillline{Backend \& Distributed Systems}{FastAPI, Django, DRF, Celery, RabbitMQ, Golang services, asyncio, Pydantic, SQLAlchemy, Pytest, API-key/JWT security}
+\skillline{Data, Cloud \& Tooling}{Pandas, SQL, PostgreSQL, MongoDB, Redis, Elasticsearch/OpenSearch, AWS (ECR, EKS, CloudWatch, S3), Docker, Git, Postman, JMeter}
+
+\section{Experience}
+\entry{Software Engineer -- Data}{Engineo Solutions Pvt Ltd}{Gurugram}{Apr 2026 -- Present}
+\subentry{Promoted from Associate Software Engineer in April 2026}
+\begin{itemize}
+  \item Developed the end-to-end backend system for a client travel-aggregator web portal and deployed it on AWS, working across ECR, EKS, CloudWatch and S3.
+  \item Built data-extraction services for two hotel websites fronted by enterprise bot-management platforms (Kasada, Akamai), collecting publicly available data within each site's terms of service and polite rate limits through browser automation, session and fingerprint handling, and adaptive request pacing.
+  \item Upgraded the in-house data-extraction framework with multi-browser-engine support, so collectors switch rendering engines per target instead of being locked to one driver.
+  \item Wrote backend services in Golang alongside the Python stack, and built the ETL path that curates extracted data into Elasticsearch for client-facing search.
+\end{itemize}
+
+\entry{Associate Software Engineer -- Data}{Engineo Solutions Pvt Ltd}{Gurugram}{Nov 2024 -- Mar 2026}
+\begin{itemize}
+  \item Developed the in-house data-extraction framework and a distributed extraction platform for a US travel-domain client: Playwright for JavaScript-rendered pages, Requests with BeautifulSoup for HTTP extraction, Celery/RabbitMQ pipelines, Redis, MongoDB and PostgreSQL.
+  \item Participated in building an airline crawling bot service and developed an ETL pipeline for travel airline data.
+  \item Built a database automation pipeline for a schema-less platform at a Big-4 consulting firm: Excel to JSON to PostgreSQL through APIs, with dynamic parent-child relational mapping and foreign-key resolution across tables, cutting manual effort by about 70\%.
+  \item Implemented Redis caching and rate limiting (40\%+ fewer redundant API calls) and a layered API security stack (API keys, IP allow-listing, JWT, CORS, bad-user-agent flagging); integrated AWS S3 and OpenSearch.
+\end{itemize}
+
+\section{Projects}
+\project{HireBeacon}{live job-intelligence platform (solo)}{hirebeacon.in}{https://hirebeacon.in}{Python \textbar\ Playwright \textbar\ PostgreSQL (Supabase, pgvector) \textbar\ GitHub Actions \textbar\ Next.js \textbar\ TypeScript}
+\begin{itemize}
+  \item Crawls 4,959 company career pages across applicant-tracking systems plus central and state government recruiting bodies, keeping 69,318 live private-sector listings continuously refreshed from official sources.
+  \item Reverse-engineered keyless, undocumented ATS endpoints through DevTools network inspection with anti-bot handling, normalizing every vendor's payload behind one extraction contract.
+  \item Ingestion is idempotent and self-healing: a close-out gate blocks deletions when a crawl returns under 50\% of baseline, so a partial failure never wipes live listings; daily scheduled crawls; 336 automated tests.
+\end{itemize}
+
+\project{XBRL Intelligence Engine}{multi-source financial-data extraction (solo)}{github.com/aman0981/XBRL\_Engine}{https://github.com/aman0981/XBRL_Engine}{}
+\begin{itemize}
+  \item Async Python pipeline pulling XBRL/iXBRL filings from SEC EDGAR and EU ESEF into one canonical model (24,852 facts, 71 filings), with cross-source reconciliation and restatement detection; 135 tests.
+\end{itemize}
+
+\section{Education}
+\edu{B.Tech, Computer Science}{GITA Autonomous College}{GPA 8.54}{2020 -- 2024}
+
+\section{Certifications \& Achievements}
+\summary{\textbf{Certifications:} Django Developer (LinkedIn Learning); 100 Days of Code: Python Pro Bootcamp (Udemy).\ \ \textbf{Problem solving:} 200+ problems on LeetCode and HackerRank; LeetCode 50-Days and Top SQL 50 badges.}
+
+
+\end{document}
